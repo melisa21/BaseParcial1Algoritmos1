@@ -1,0 +1,61 @@
+UNIDAD TEMÁTICA  3: Listas, Pilas y Colas
+TRABAJO DE APLICACIÓN  2
+Resta implementar la última de las funcionalidades básicas esperadas:
+==> Listar todos los productos registrados, ordenadospor nombre, presentando además su stock 
+Ejercicio #3
+PASO 1
+Desarrollar en SEUDOCÓDIGO (Lenguaje natural, pre y post condiciones, seudo código detallado
+sobre  el  TDA,  descripción  de  casos  de  prueba,  cálculo  del  orden  del  tiempo  de  ejecución) un 
+algoritmo  que,  aplicado  sobre  una  lista  ordenada,inserte  un  nodo en  forma  ordenada 
+ascendente en esa lista, de acuerdo a la siguiente firma
+En la clase ListaOrdenada: boolean insertarOrdenado (TNodo unNodo)
+
+=========================================================================================================
+
+LENGUAJE NATURAL
+1. Chequear si la lista esta vacia, e ingresar el nodo
+2. Si la lista no esta vacia, recorrer la lista mientras sus nodos sean menores que el nodo a insertar
+3. Si se llega al ultimo elemento de la lista, insertar el nodo al final
+4. Sino, asignar el siguiente del nodo a insertar como el siguiente del nodo en el que se detuvo la
+iteración, y el siguiente del nodo donde se detuvo la iteración como el siguiente del nodo a insertar
+(básicamente, insertar el nodo a continuación del nodo donde se detuvo la iteración)
+
+
+SEUDOCÓDIGO
+boolean insertarOrdenado(INodo<T> unNodo)
+INICIO
+SI (lista vacía) ENTONCES
+    primero <-- unNodo
+SINO
+    INodo<T> aux <-- primero
+    MIENTRAS (aux.getSiguiente() <> null AND aux.getSiguiente.compareTo(unNodo.getEtiqueta()) < 0) HACER
+        aux = aux.getSiguiente()
+    FIN MIENTRAS
+    SI (aux.getSiguiente = null) ENTONCES
+        unNodo.setSiguiente(null)
+        aux.setSiguiente(unNodo)
+    SINO ENTONCES
+        unNodo.setSiguiente(aux.getSiguiente())
+        aux.setSiguiente(unNodo)
+    FIN SI
+FIN SI
+DEVOLVER true
+FIN
+
+
+PRECONDICIONES:
+    - El nodo pasado como parámetro no debe ser null
+
+POSCONDICIONES:
+    - Si la lista esta vacía, insertar el nodo al principio
+    - Si el nodo a insertar es mayor que todos los nodos de la lista, se inserta al final
+    - El nodo insertado debe ser mayor que todos sus predecesores y menor o igual que sus sucesores
+
+
+ORDEN: LINEAL T(N) = O(N)
+El peor caso es cuando se inserta al final
+
+
+CASOS DE PRUEBA:
+    - Si inicialmente la lista esta vacia, debe contener un elemento luego de ejecutarse la funcion
+    - Si inicialmente la lista tiene elementos, debe contener un elemento más de los que ya tenía
